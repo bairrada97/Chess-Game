@@ -1,0 +1,22 @@
+@import "layout";
+
+
+.chess {
+  background: #babaf0;
+  width: 100%;
+  max-width: 800px;
+  height: 800px;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+
+
+
+  div {
+    border: 1px solid white;
+    background-repeat: no-repeat;
+  }
+
+  .selected{
+    box-shadow: inset 3px 3px 20px black;
+  }
+}

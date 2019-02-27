@@ -1,0 +1,214 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+a,
+abbr,
+acronym,
+address,
+applet,
+article,
+aside,
+audio,
+b,
+big,
+blockquote,
+body,
+canvas,
+caption,
+center,
+cite,
+code,
+dd,
+del,
+details,
+dfn,
+div,
+dl,
+dt,
+em,
+embed,
+fieldset,
+figcaption,
+figure,
+footer,
+form,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+header,
+hgroup,
+html,
+i,
+iframe,
+img,
+ins,
+kbd,
+label,
+legend,
+li,
+mark,
+menu,
+nav,
+object,
+ol,
+output,
+p,
+pre,
+q,
+ruby,
+s,
+samp,
+section,
+small,
+span,
+strike,
+strong,
+sub,
+summary,
+sup,
+table,
+tbody,
+td,
+tfoot,
+th,
+thead,
+time,
+tr,
+tt,
+u,
+ul,
+var,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+
+html {
+  touch-action: manipulation;
+}
+
+body {
+  line-height: 1;
+  box-sizing: border-box;
+  text-rendering: optimizeLegibility;
+  text-rendering: geometricPrecision;
+  font-smooth: always;
+  font-smoothing: antialiased;
+  -moz-font-smoothing: antialiased;
+  -webkit-font-smoothing: antialiased;
+  -webkit-font-smoothing: subpixel-antialiased;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  overflow: hidden;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+blockquote,
+q {
+  quotes: none;
+}
+
+blockquote:after,
+blockquote:before,
+q:after,
+q:before {
+  content: '';
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+// img {
+//   width: 100%;
+// }
+
+a {
+  text-decoration: none;
+  cursor: pointer;
+  outline: none;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+/* Font sizes */
+
+$font-size10: 10px;
+$font-size12: 12px;
+$font-size14: 14px;
+$font-size25: 25px;
+$font-size80: 80px; /* Font Family */
+$monteserratRegular: 'montserratregular', sans-serif;
+$monteserratLight: 'montserratlight', sans-serif;
+$monteserratThin: 'montserratthin', sans-serif;
+$monteserratMedium: 'montserratmedium', sans-serif;
+$lightBlue: linear-gradient(#309DCC, #73E4EB);
+$black: #000000;
+$white: #ffffff; /*BreakPoints*/
+$min-mobile-width: 0;
+$max-mobile-width: 512px;
+$min-tablet-width: 513px;
+$max-tablet-width: 768px;
+$min-laptop-width: 769px;
+$max-laptop-width: 1023px;
+$min-desktop-width: 1024px;
+$max-desktop-width: 1280px;
+$min-mobile-height: 0;
+$max-mobile-height: 600px;
+
+
+
+
+@mixin typography($minVal, $maxVal, $minVw, $maxVw) {
+  font-size: calc(#{$minVal}px + #{($maxVal - $minVal)} * ((100vw - #{$minVw}px) / #{($maxVw - $minVw)}));
+}
+
+@mixin mobile {
+  @media (min-width: #{$min-mobile-width}) and (max-width: #{$max-mobile-width}) {
+    @content;
+  }
+}
+@mixin tablet {
+  @media (min-width: #{$min-mobile-width}) and (max-width: #{$max-tablet-width}) {
+    @content;
+  }
+}
+
+@mixin minHeight {
+  @media (min-height:#{$min-mobile-height}) and (max-height: #{$max-mobile-height}) {
+    @content;
+  }
+}
+@mixin media-smaller-than($value) {
+  @media (min-width: 0px) and (max-width: #{$value}) {
+    @content;
+  }
+}
