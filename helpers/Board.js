@@ -146,16 +146,17 @@ class Board {
       _r += r;
       if (this.isInBounds(_c, _r)) {
         if (!moves.spread) {
-          if (this.isSamePlayer(this.board[_r][_c])) continue
+          if (this.board[_r][_c].piece.color == this.activePlayer.color) continue
           let tile = this.board[_r][_c];
           this.activeTileList.push(tile);
-          tile.setPossibleMoves(true);
+          tile.possibleMoves = true;
+          tile.element.classList.add('selected');
           continue;
         }
 
-        while (this.isInBounds(_c, _r) && (this.board[_r][_c].piece.color != this.activePlayer.color || this.board[_r][_c].hasPiece())) {
+        while (this.isInBounds(_c, _r) && (this.board[_r][_c].piece.color != this.activePlayer.color || this.board[_r][_c].piece == "")) {
 
-          if (this.isInBounds(_c, _r) && this.isEnemy()) {
+          if (this.isInBounds(_c, _r) && this.board[_r][_c].piece.color != this.activePlayer.color && this.board[_r][_c].hasPiece()) {
             let tile = this.board[_r][_c];
             this.activeTileList.push(tile);
             tile.possibleMoves = true;
@@ -200,15 +201,6 @@ class Board {
   isInBounds(_c, _r) {
     return (_r >= 0 && _r <= this.board.length - 1) && (_c >= 0 && _c <= this.board[0].length - 1)
   }
-
-  isEnemy(){
-    return this.board[_r][_c].piece.color != this.activePlayer.color && this.board[_r][_c].hasPiece()
-  }
-
-  isSamePlayer(tile){
-    return tile.piece.color == this.activePlayer.color;
-  }
-
 
 
   events() {
