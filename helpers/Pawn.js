@@ -6,9 +6,11 @@ class Pawn extends Piece {
     let name = "pawn",
       img = "";
 
+
     img = color == '#fff' ? "url('https://upload.wikimedia.org/wikipedia/commons/0/04/Chess_plt60.png') no-repeat center" : "url('https://upload.wikimedia.org/wikipedia/commons/c/cd/Chess_pdt60.png') no-repeat center";
     super(name, img, color);
     this.firstMove = true;
+    this.attack = true;
 
     if (color == '#fff') {
       this._moves = {
@@ -27,26 +29,42 @@ class Pawn extends Piece {
         }
       }
 
+      this.attackMoves = {
+        spread: false,
+        list: [
+          [-1, 1],
+          [-1, -1]
+        ]
 
-    }else{
+      };
+    } else {
       this._moves = {
         firstmove: {
-          spread : false,
-          list:[
+          spread: false,
+          list: [
             [1, 0],
             [2, 0]
           ]
         },
-        otherMoves:{
-          spread : false,
-          list:[
+        otherMoves: {
+          spread: false,
+          list: [
             [1, 0],
           ]
         }
-    }
+      }
+
+      this.attackMoves ={
+        spread : false,
+          list:[
+            [1,-1],
+            [1,1]
+          ]
+        
+      } ;
     }
 
-    };
+  };
 
 
   get moves() {

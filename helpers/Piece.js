@@ -5,6 +5,7 @@ class Piece {
     this.image = image;
     this.color = color
     this.firstMove = true;
+    this.attack = false;
   }
 
   moveTo(tile){

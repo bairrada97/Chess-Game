@@ -1,3 +1,4 @@
+//TODO: Use piece factory ?
 import Pieces, {
   Rook,
   Knight,
@@ -18,16 +19,21 @@ class Board {
 
     this.activeTile = null;
     this.activeTileList = [];
+
     this.player1 = new Players("#fff");
     this.player2 = new Players("#000");
     this.activePlayer = this.player1;
     this.board = this.buildBoard();
     this.drawBoard();
+
+    let king = this.getKing("#fff");
+    console.log(king.isChecked());
     this.events();
 
   }
 
   buildBoard() {
+    //TODO: board on config file
     this.board = [
       [new Tiles(new Rook(this.player2.color)), new Tiles(new Knight(this.player2.color)), new Tiles(new Bishop(this.player2.color)), new Tiles(new Queen(this.player2.color)), new Tiles(new King(this.player2.color)), new Tiles(new Bishop(this.player2.color)), new Tiles(new Knight(this.player2.color)), new Tiles(new Rook(this.player2.color))],
       [new Tiles(new Pawn(this.player2.color)), new Tiles(new Pawn(this.player2.color)), new Tiles(new Pawn(this.player2.color)), new Tiles(new Pawn(this.player2.color)), new Tiles(new Pawn(this.player2.color)), new Tiles(new Pawn(this.player2.color)), new Tiles(new Pawn(this.player2.color)), new Tiles(new Pawn(this.player2.color))],
@@ -132,6 +138,8 @@ class Board {
 
     const moves = this.activeTile.tile.piece.moves;
     let activeTile = this.activeTile.tile;
+  
+    
 
     for (var i = 0; i < moves.list.length; i++) {
       let r = moves.list[i][0],
@@ -139,8 +147,8 @@ class Board {
         _r = activeTile.coordinates.r,
         _c = activeTile.coordinates.c;
 
-      _c += c;
-      _r += r;
+        _c += c;
+        _r += r;
 
       if (this.isInBounds(_c, _r)) {
 
@@ -148,13 +156,43 @@ class Board {
         if (!moves.spread) {
 
           if (this.board[_r][_c].piece.color == this.activePlayer.color) continue
+            //se tiver ataque diferente
+          if (this.activeTile.tile.piece.attack) {
+          
+            const attack = this.activeTile.tile.piece.attackMoves;
+            for (var j = 0; j < attack.list.length; j++) {
+              let r = attack.list[j][0],
+                c = attack.list[j][1],
+                Ar = activeTile.coordinates.r,
+                Ac = activeTile.coordinates.c;
+      
+                Ac += c;
+                Ar += r
+             
+                 if (this.isInBounds(Ac, Ar) && this.board[Ar][Ac].piece.color != this.activePlayer.color && this.board[Ar][Ac].hasPiece()) {
+                  this.updateTileList(this.board[Ar][Ac]);
+               
+                  
+                }
+                
+                if(!this.board[_r][_c].hasPiece()){
 
-          let tile = this.board[_r][_c];
+                  let tile = this.board[_r][_c];
 
-          this.updateTileList(tile);
-          continue;
+                    this.updateTileList(tile);
+                    continue;
+                }
+              
+              }
+            }else{
+              let tile = this.board[_r][_c];
+
+               this.updateTileList(tile);
+               
+            }
+          
+            continue;
         }
-
 
         // incrementa os tiles possiveis ate encontrar uma peça inimiga e enquanto houver tiles vazios;
         while (this.isInBounds(_c, _r) && (this.board[_r][_c].piece.color != this.activePlayer.color || !this.board[_r][_c].hasPiece())) {
@@ -176,7 +214,7 @@ class Board {
 
     }
 
-
+    
   }
 
   resetActiveTile() {
@@ -207,7 +245,17 @@ class Board {
     this.activeTileList.push(tile);
     tile.setPossibleMoves(true);
   }
+  getKing(color) {
+    for (let r = 0; r < this.board.length; r++) {
+      for (var c = 0; c < this.board.length; c++) {
+        let tile = this.board[r][c];
+        if (tile.piece.name == "King" && tile.piece.color == color) {
 
+          return tile.piece;
+        }
+      }
+    }
+  }
   events() {
     document.addEventListener("onTileClick", (e) => {
       this.setActivepiece(e.detail);
