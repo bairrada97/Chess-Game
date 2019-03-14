@@ -25,8 +25,6 @@ class Board {
     this.drawBoard();
     this.events();
 
-    // Add an event listener
-
   }
 
   buildBoard() {
@@ -125,7 +123,6 @@ class Board {
 
   setActiveTile(tile) {
     this.activeTile = tile;
-    //this.activeTileList.push(tile)
     this.activeTile.tile.element.classList.add('selected');
     this.setPossibleMoves();
   }
@@ -138,36 +135,40 @@ class Board {
 
     for (var i = 0; i < moves.list.length; i++) {
       let r = moves.list[i][0],
-        c = moves.list[i][1];
-      let _r = activeTile.coordinates.r;
-      let _c = activeTile.coordinates.c;
+        c = moves.list[i][1],
+        _r = activeTile.coordinates.r,
+        _c = activeTile.coordinates.c;
 
       _c += c;
       _r += r;
+
       if (this.isInBounds(_c, _r)) {
+
+        //se nao alastra o movimento
         if (!moves.spread) {
+
           if (this.board[_r][_c].piece.color == this.activePlayer.color) continue
+
           let tile = this.board[_r][_c];
-          this.activeTileList.push(tile);
-          tile.possibleMoves = true;
-          tile.element.classList.add('selected');
+
+          this.updateTileList(tile);
           continue;
         }
 
-        while (this.isInBounds(_c, _r) && (this.board[_r][_c].piece.color != this.activePlayer.color || this.board[_r][_c].piece == "")) {
 
+        // incrementa os tiles possiveis ate encontrar uma peça inimiga e enquanto houver tiles vazios;
+        while (this.isInBounds(_c, _r) && (this.board[_r][_c].piece.color != this.activePlayer.color || !this.board[_r][_c].hasPiece())) {
+          let tile = this.board[_r][_c];
+
+
+          //se a peça foi inimiga acrescenta um possible move ao tile onde esta situado a peça inimiga
           if (this.isInBounds(_c, _r) && this.board[_r][_c].piece.color != this.activePlayer.color && this.board[_r][_c].hasPiece()) {
-            let tile = this.board[_r][_c];
-            this.activeTileList.push(tile);
-            tile.possibleMoves = true;
-            tile.element.classList.add('selected');
+            this.updateTileList(tile);
             break;
           }
 
-          let tile = this.board[_r][_c];
-          this.activeTileList.push(tile);
-          tile.possibleMoves = true;
-          tile.element.classList.add('selected');
+
+          this.updateTileList(tile);
           _c += c;
           _r += r;
         }
@@ -202,6 +203,10 @@ class Board {
     return (_r >= 0 && _r <= this.board.length - 1) && (_c >= 0 && _c <= this.board[0].length - 1)
   }
 
+  updateTileList(tile) {
+    this.activeTileList.push(tile);
+    tile.setPossibleMoves(true);
+  }
 
   events() {
     document.addEventListener("onTileClick", (e) => {
