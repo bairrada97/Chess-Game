@@ -155,7 +155,7 @@ class Board {
         //se nao alastra o movimento
         if (!moves.spread) {
 
-          if (this.board[_r][_c].piece.color == this.activePlayer.color) continue
+          
             //se tiver ataque diferente
           if (this.activeTile.tile.piece.attack) {
           
@@ -190,7 +190,7 @@ class Board {
                this.updateTileList(tile);
                
             }
-          
+            if (this.board[_r][_c].piece.color == this.activePlayer.color) continue
             continue;
         }
 
