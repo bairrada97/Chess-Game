@@ -2,12 +2,12 @@ import Piece from './Piece.js';
 
 class Bishop extends Piece {
 
-  constructor(color) {
+  constructor(player) {
     let name = "Bishop",
       img = "";
 
-    img = color == '#000' ? "url('https://upload.wikimedia.org/wikipedia/commons/8/81/Chess_bdt60.png') no-repeat center" : "url('https://upload.wikimedia.org/wikipedia/commons/9/9b/Chess_blt60.png') no-repeat center";
-    super(name, img, color)
+    img = player == 1 ? "url('https://upload.wikimedia.org/wikipedia/commons/9/9b/Chess_blt60.png') no-repeat center" : "url('https://upload.wikimedia.org/wikipedia/commons/8/81/Chess_bdt60.png') no-repeat center";
+    super(name, img, player)
 
     this._moves = {
 

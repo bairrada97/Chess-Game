@@ -1,3 +1,5 @@
+import Board from './Board.js';
+
 class Players{
 
   constructor(color) {

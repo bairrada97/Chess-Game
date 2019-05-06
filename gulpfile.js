@@ -1,5 +1,4 @@
 var gulp = require('gulp');
-var obfuscator = require('gulp-javascript-obfuscator');
 var concat = require('gulp-concat');
 var sync = require('browser-sync');
 var sass = require('gulp-sass');
@@ -8,7 +7,7 @@ var del = require('del');
 var htmlmin = require('gulp-htmlmin');
 var autoprefixer = require('gulp-autoprefixer');
 var refresh = require('gulp-refresh');
-var babel = require('gulp-babel')
+
 
 
 gulp.task('default', function() {
@@ -35,14 +34,6 @@ gulp.task('pages', function() {
     .pipe(gulp.dest('dist'));
 });
 
-gulp.task('obfuscate', function() {
-  var src = gulp.src('scripts/script.js');
-  var dest = gulp.dest('dist');
-
-  return src.pipe(obfuscator())
-    .pipe(dest);
-  gulp.src('scripts/*').pipe(obfuscator()).pipe(gulp.dest('dist'));
-});
 
 
 gulp.task('concat', function() {
@@ -55,17 +46,9 @@ gulp.task('concat', function() {
 gulp.task('scripting', function() {
   gulp.src('scripts/*.js')
     .pipe(concat('main.js'))
-    .pipe(obfuscator())
     .pipe(gulp.dest('dist'))
     .pipe(refresh());
 
-  return gulp.src('dist/*.js')
-    .pipe(babel({
-      presets: ['es2015'],
-      plugins: ['babel-polyfill']
-    }))
-
-    .pipe(gulp.dest('dist'));
 });
 
 

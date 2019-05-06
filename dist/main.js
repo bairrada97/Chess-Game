@@ -1,1 +1,27 @@
-var _0xff4e=['log','.chess'];(function(_0x30fae4,_0x490714){var _0x314206=function(_0x27a21c){while(--_0x27a21c){_0x30fae4['push'](_0x30fae4['shift']());}};_0x314206(++_0x490714);}(_0xff4e,0x17b));var _0x1340=function(_0x39003c,_0xfca234){_0x39003c=_0x39003c-0x0;var _0x389c72=_0xff4e[_0x39003c];return _0x389c72;};import _0x289a53 from'../helpers/Board.js';const Chess=function(){const _0x4a21fc=document['querySelector'](_0x1340('0x0'));const _0x350f82=()=>{const _0x551776=new _0x289a53();_0x9a031d();};const _0x9a031d=()=>{};return{'init':_0x350f82};}();Chess['init']();console[_0x1340('0x1')](Chess);
+import Board from '../helpers/Board.js';
+
+const Chess = (function () {
+  const $Module = document.querySelector('.chess');
+  const init = () => {
+    const board= new Board();
+   events();
+  }
+  const events = () => {
+
+  }
+
+
+ return{
+   init: init,
+
+ }
+}());
+Chess.init();
+console.log(Chess);
+
+import Chess from '../Classes/Chess.js'
+
+
+var chess = new Chess();
+
+  

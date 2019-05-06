@@ -2,12 +2,12 @@ import Piece from './Piece.js';
 
 class Queen extends Piece {
 
-  constructor(color) {
+  constructor(player) {
     let name = "Queen",
       img = "";
 
-    img = color == '#000' ? "url('https://upload.wikimedia.org/wikipedia/commons/a/af/Chess_qdt60.png') no-repeat center" : "url('https://upload.wikimedia.org/wikipedia/commons/4/49/Chess_qlt60.png') no-repeat center";
-    super(name, img, color)
+    img = player == 1 ? "url('https://upload.wikimedia.org/wikipedia/commons/4/49/Chess_qlt60.png') no-repeat center" : "url('https://upload.wikimedia.org/wikipedia/commons/a/af/Chess_qdt60.png') no-repeat center";
+    super(name, img, player)
 
 
 
