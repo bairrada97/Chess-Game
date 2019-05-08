@@ -18,7 +18,7 @@ class Config {
         this.board = {
             size : 8,// 8 tiles
             color:{
-                even: "#7d8796",
+                even: "#d0d0d0",
                 odd: "#fff"
             }
         }
@@ -26,21 +26,21 @@ class Config {
         this.boards = []; //stores boards pieces configuration
         this.boards['empty'] = this.createEmptyBoard();
 
-        
+
         this.initBoards();
     }
 
     createEmptyBoard(){
-        let board = []; 
-        
+        let board = [];
+
         for (let r = 0; r < this.board.size; r++) {
             board.push([]); //create new row
             for (let c = 0; c < this.board.size; c++) {
                 board[r].push(new Tiles()); //create new column
             }
-            
+
         }
-        return board;      
+        return board;
     }
 
     initBoards(){
@@ -58,7 +58,7 @@ class Config {
             }
          */
         var board = this.createEmptyBoard();
-      
+
         board[0][0].addPiece(new Rook( this.player2));
         board[0][1].addPiece(new Knight( this.player2));
         board[0][2].addPiece(new Bishop( this.player2));
@@ -68,10 +68,10 @@ class Config {
         board[0][6].addPiece(new Knight( this.player2));
         board[0][7].addPiece(new Rook( this.player2));
         //black pawn row
-        for (var c = 0; c < this.board.size; c++) { 
-            board[1][c].addPiece(new Pawn(this.player2)) 
+        for (var c = 0; c < this.board.size; c++) {
+            board[1][c].addPiece(new Pawn(this.player2))
         }
-        
+
         //white
         board[7][0].addPiece(new Rook(this.player1));
         board[7][1].addPiece(new Knight(this.player1));
@@ -82,11 +82,11 @@ class Config {
         board[7][6].addPiece(new Knight(this.player1));
         board[7][7].addPiece(new Rook(this.player1));
         //white pawn row
-        for (var c = 0; c < this.board.size; c++) { 
-            board[6][c].addPiece(new Pawn(this.player1)) 
+        for (var c = 0; c < this.board.size; c++) {
+            board[6][c].addPiece(new Pawn(this.player1))
         }
-        this.boards['default'] = board;  
-        
+        this.boards['default'] = board;
+
         board = this.createEmptyBoard();
 
         board[1][5].addPiece(new Pawn(this.player2));
@@ -99,7 +99,7 @@ class Config {
         board[3][7].addPiece(new Pawn(this.player1));
         board[5][2].addPiece(new King(this.player1));
 
-        this.boards['threepawn'] = board;  
+        this.boards['threepawn'] = board;
     }
 }
 

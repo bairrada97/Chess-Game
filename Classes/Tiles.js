@@ -11,17 +11,17 @@ class Tiles {
       r: 0,
       c: 0
     };
-    
+
     this.event = new CustomEvent("onTileClick", {
       "detail": {
         tile: this
       }
     });
-    
+
   }
   getTemplate(bgcolor) {
     this.bgcolor = bgcolor
-    
+
     this.render();
     this.$element.addEventListener('click', () => {
       document.dispatchEvent(this.event);
@@ -59,13 +59,13 @@ class Tiles {
     this.render();
   }
   render(){
-    //update html element 
-    this.$element.innerHTML = (`${(this.piece ? this.piece.name : "")}`); //add piece name in html
+    //update html element
+    // this.$element.innerHTML = (`${(this.piece ? this.piece.name : "")}`); //add piece name in html
     this.$element.style.background = `${this.bgcolor} ${(this.piece ? this.piece.image : "")}`;
     (this.hasValidMove ? this.$element.classList.add('valid') : this.$element.classList.remove('valid') );
     (this.isSelected ? this.$element.classList.add('selected') : this.$element.classList.remove('selected') );
   }
-  
+
 }
 
 export default Tiles;
